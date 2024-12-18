@@ -1,5 +1,5 @@
 # Balatro: Donuts Mod
 
-A sweet box of quirky Jokers and more delectible cards to grub on!
+A simple mod created by me that plans on adding plenty of jokers, consumables, and other silly things
 
 Requires Lovely and the most recent release of Steammodded
