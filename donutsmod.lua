@@ -1,14 +1,6 @@
 assert(SMODS.load_file("items/jokers.lua"))()
 assert(SMODS.load_file("items/food.lua"))()
 
--- Should be removed and replaced with self made placeholders in the future
-SMODS.Atlas{
-	key = 'placeholders',
-	path = 'placeholders.png',
-	px = 71,
-	py = 95
-}
-
 SMODS.Atlas{
 	key = 'jokers',
 	path = 'jokers.png',
