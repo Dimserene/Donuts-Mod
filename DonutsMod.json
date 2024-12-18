@@ -1,0 +1,17 @@
+{
+	"id": "donutsmod",
+	"name": "Donut's Mod",
+	"display_name": "Donut's Mod",
+	"author": ["BetterDonutGalaxy"],
+	"description": "A sweet box of quirky Jokers and more delectible cards to grub on!",
+	"prefix": "dnm",
+	"main_file": "donutsmod.lua",
+	"priority": -1,
+	"badge_text_colour": "0081D3",
+	"badge_colour": "FFFFFF",
+	"version": "0.8.0",
+	"dependencies": [
+		"Steamodded (>=1.0.0~ALPHA-0917a)", 
+		"Lovely (>=0.6)"
+	]
+}
