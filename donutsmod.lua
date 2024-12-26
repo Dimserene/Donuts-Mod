@@ -1,5 +1,25 @@
 assert(SMODS.load_file("items/jokers.lua"))()
 assert(SMODS.load_file("items/food.lua"))()
+assert(SMODS.load_file("items/deck.lua"))()
+
+Sparklingwateractive = false
+
+function cardsplashed(card)
+        local _,_,_,scoring_hand,_ = G.FUNCS.get_poker_hand_info(G.play.cards)
+        for _, scored_card in ipairs(scoring_hand) do
+            if scored_card == card then
+                return false
+            end
+        end
+        return true
+    end
+
+SMODS.Atlas{
+	key = 'placeholders',
+	path = 'placeholders.png',
+	px = 71,
+	py = 95
+}
 
 SMODS.Atlas{
 	key = 'jokers',
@@ -72,7 +92,7 @@ SMODS.current_mod.extra_tabs = function()
               {
                 n = G.UIT.T,
                 config = {
-                  text = "Lovely Patches: ",
+                  text = "Other Programmers: ",
                   shadow = true,
                   scale = scale * 0.8,
                   colour = G.C.UI.TEXT_LIGHT
@@ -81,7 +101,7 @@ SMODS.current_mod.extra_tabs = function()
               {
                 n = G.UIT.T,
                 config = {
-                  text = "LunaAstraCassiopeia",
+                  text = "LunaAstraCassiopeia, Maratby",
                   shadow = true,
                   scale = scale * 0.8,
                   colour = G.C.BLUE
@@ -99,7 +119,7 @@ SMODS.current_mod.extra_tabs = function()
               {
                 n = G.UIT.T,
                 config = {
-                  text = "Artist: ",
+                  text = "Other Artist: ",
                   shadow = true,
                   scale = scale * 0.8,
                   colour = G.C.UI.TEXT_LIGHT

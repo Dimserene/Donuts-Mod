@@ -34,15 +34,75 @@ SMODS.Booster{
         weight = 0.8,
 		loc_txt = {
         ['en-us'] = {
-            name = 'Basic Taste Pack',
+            name = 'Taste Pack',
             text = {
                 "Choose {C:attention}#1#{} of up to",
-				"{C:attention}#2#{C:statement} food{} cards to",
+				"{C:attention}#2#{C:red} Refreshment{} cards to",
 				"add to consumables"
             }
         }
 	},
         pos = { x = 2, y = 2 },
+        loc_vars = function(self, info_queue, card)
+            return {vars = {card.config.center.config.choose, card.ability.extra}}
+        end,
+        ease_background_colour = function(self)
+            ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.food)
+            ease_background_colour({ new_colour = G.C.SECONDARY_SET.food, special_colour = G.C.BLACK, contrast = 1 })
+        end,
+        create_card = function(self, card)
+            return create_card("food", G.pack_cards, nil, nil, true, true, nil, "food")
+        end,
+        group_key = "food_pack",
+}
+
+SMODS.Booster{
+        key = 'food_jumbo',
+        config = {extra = 4, choose = 1},
+        atlas = 'food',
+        cost = 6,
+        weight = 0.8,
+		loc_txt = {
+        ['en-us'] = {
+            name = 'Jumbo Taste Pack',
+            text = {
+                "Choose {C:attention}#1#{} of up to",
+				"{C:attention}#2#{C:red} Refreshment{} cards to",
+				"add to consumables"
+            }
+        }
+	},
+        pos = { x = 1, y = 2 },
+        loc_vars = function(self, info_queue, card)
+            return {vars = {card.config.center.config.choose, card.ability.extra}}
+        end,
+        ease_background_colour = function(self)
+            ease_colour(G.C.DYN_UI.MAIN, G.C.SECONDARY_SET.food)
+            ease_background_colour({ new_colour = G.C.SECONDARY_SET.food, special_colour = G.C.BLACK, contrast = 1 })
+        end,
+        create_card = function(self, card)
+            return create_card("food", G.pack_cards, nil, nil, true, true, nil, "food")
+        end,
+        group_key = "food_pack",
+}
+
+SMODS.Booster{
+        key = 'food_mega',
+        config = {extra = 4, choose = 2},
+        atlas = 'food',
+        cost = 8,
+        weight = 0.8,
+		loc_txt = {
+        ['en-us'] = {
+            name = 'Mega Taste Pack',
+            text = {
+                "Choose {C:attention}#1#{} of up to",
+				"{C:attention}#2#{C:red} Refreshment{} cards to",
+				"add to consumables"
+            }
+        }
+	},
+        pos = { x = 1, y = 2 },
         loc_vars = function(self, info_queue, card)
             return {vars = {card.config.center.config.choose, card.ability.extra}}
         end,
@@ -66,7 +126,7 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Milk',
             text = {
-                '{C:blue}+#1#{} Hands.'
+                '{C:blue}+#1#{} Hands'
             }
         }
 	},
@@ -96,7 +156,7 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Red Wine',
             text = {
-                '{C:red}+#1#{} Discards.'
+                '{C:red}+#1#{} Discards'
             }
         }
 	},
@@ -126,7 +186,7 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Bread Sticks',
             text = {
-                'Decreases current blind by 15%.'
+                'Decreases current blind by 15%'
             }
         }
 	},
@@ -159,7 +219,7 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Doughnut',
             text = {
-                'All played cards are retriggered', 'until the end of the round.'
+                'All played cards are retriggered', 'until the end of the round'
             }
         }
 	},
@@ -250,7 +310,84 @@ SMODS.Consumable{
     end
 }
 
- --[[SMODS.Consumable{
+--[[SMODS.Consumable{
+    key = 'rarejokers',
+    set = 'food',
+    atlas = 'food',
+    pos = { x = 0, y = 0 },
+    cost = 3,
+    loc_txt = {
+        ['en-us'] = {
+            name = 'rare jokers',
+            text = {
+                'Creates a Random',
+				'Perishable {C:red}Rare{C:attention} Joker{}',
+				'{C:inactive}(Must have room)'
+            }
+        }
+	},
+	loc_vars = function(self, info_queue, center)
+        return { vars = {}}
+    end,
+	can_use = function(self, card)
+		return G.jokers.config.card_limit > #G.jokers.cards
+	end,
+	use = function(self, card, area, copier)
+		local jokers_to_create = 1
+                G.GAME.joker_buffer = G.GAME.joker_buffer + jokers_to_create
+                G.E_MANAGER:add_event(Event({
+                    func = function() 
+						for i = 1, jokers_to_create do
+							local _card = create_card('Joker', G.jokers, nil, 0.99, nil, nil, nil, 'food')
+                            _card:add_to_deck()
+                            G.jokers:emplace(_card)
+                            _card:start_materialize()
+                            G.GAME.joker_buffer = 0
+							_card:set_perishable(_perishable)
+							_card.ability.perish_tally = G.GAME.perishable_rounds
+						end
+                        return true
+                    end}))
+			delay(0.6)
+		end
+}]]
+
+SMODS.Consumable{
+    key = 'strudel',
+    set = 'food',
+    atlas = 'food',
+    pos = { x = 0, y = 0 },
+    cost = 3,
+    loc_txt = {
+        ['en-us'] = {
+            name = 'Toaster Srudels',
+            text = {
+                'Immediately draws {C:attention}#1#{} cards',
+				'{C:inactive}(Ignores hand size)'
+            }
+        }
+	},
+	config = {extra = 5},
+    loc_vars = function(self, info_queue, card)
+        return { vars = {card.ability.extra} }
+    end,
+	can_use = function(self, card)
+		return G.STATE == G.STATES.SELECTING_HAND
+	end,
+	use = function(self, card, area, copier)
+		delay(0.6)
+		G.E_MANAGER:add_event(Event({
+            func = (function()
+				card:juice_up(0.3, 0.5)
+                return true
+            end)
+        }))
+		G.FUNCS.draw_from_deck_to_hand(card.ability.extra)
+		delay(0.6)
+    end
+}
+
+SMODS.Consumable{
     key = 'water',
     set = 'food',
     atlas = 'food',
@@ -260,7 +397,10 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Sparkling Water',
             text = {
-                'All played cards are scored.'
+                'All played cards are scored',
+				'and extra cards are',
+				'{C:attention}retriggered{} until the',
+				'end of the round'
             }
         }
 	},
@@ -278,15 +418,24 @@ SMODS.Consumable{
 		card.ability.extra.active = true
 		local eval = function(card) return card.ability.extra.active end
 		juice_card_until(card, eval, true)
+		Sparklingwateractive = true
 	end,
 	calculate = function(self, card, context)
-		if context.individual and card.ability.extra.active then
-			for i=1, #G.play.cards do
-				scoring_hand[i] = G.play.cards[i]
+		if context.cardarea == G.play and context.repetition and card.ability.extra.active then
+			if cardsplashed(context.other_card) == true then
+				return {
+						message = localize('k_again_ex'),
+						repetitions = 1,
+						card = card
+					}
 			end
+		end
+		if context.selling_self then
+			Sparklingwateractive = false
 		end
 		if context.end_of_round and not context.repetition and not context.individual and not card.getting_sliced and card.ability.extra.active then
 			card.getting_sliced = true
+			Sparklingwateractive = false
                  G.E_MANAGER:add_event(Event({
                                 func = function()
                                     play_sound('tarot1')
@@ -306,11 +455,13 @@ SMODS.Consumable{
                                 message = localize('k_eaten_ex'),
                                 colour = G.C.FILTER
                             }
+			end
 		end
-	end
-}]]
+}
 
--- idk how to make a consumable function like splash -_-'
+if Sparklingwateractive then 
+	scoring_hand[i] = G.play.cards[i]
+end
 
 -- code taken from DreadJokers with permission to allow consumables to be added to the consumable slot directly
     G.FUNCS.can_reserve_card = function(e)
