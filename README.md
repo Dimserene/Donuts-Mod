@@ -4,4 +4,4 @@ A simple mod created by me that plans on adding plenty of jokers, consumables, a
 
 Requires both [Lovely](https://github.com/ethangreen-dev/lovely-injector) and the most recent release of [Steammodded](https://github.com/Steamopollys/Steamodded) to function properly 
 
-Put the main folder in %APPDATA%/Balatro/Mods and you're ready to go!
+Download and unzip the main folder in %APPDATA%/Balatro/Mods and you're ready to go!

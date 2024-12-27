@@ -154,7 +154,7 @@ SMODS.Consumable{
     cost = 3,
     loc_txt = {
         ['en-us'] = {
-            name = 'Red Wine',
+            name = 'Wine',
             text = {
                 '{C:red}+#1#{} Discards'
             }
@@ -219,7 +219,8 @@ SMODS.Consumable{
         ['en-us'] = {
             name = 'Doughnut',
             text = {
-                'All played cards are retriggered', 'until the end of the round'
+                'All played cards are {C:attention}retriggered{}', 
+				'until the end of the round'
             }
         }
 	},
@@ -357,10 +358,10 @@ SMODS.Consumable{
     set = 'food',
     atlas = 'food',
     pos = { x = 0, y = 0 },
-    cost = 3,
+    cost = 3, 
     loc_txt = {
         ['en-us'] = {
-            name = 'Toaster Srudels',
+            name = 'Toaster Strudels',
             text = {
                 'Immediately draws {C:attention}#1#{} cards',
 				'{C:inactive}(Ignores hand size)'
