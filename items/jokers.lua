@@ -704,7 +704,6 @@ SMODS.Joker{
 --Actually makes Diamonds considered Spades or Clubs
 function Card:is_suit(suit, bypass_debuff, flush_calc)
     if flush_calc then
-		print('woo')
 		if next(find_joker('j_dnm_blacktie')) and self.base.suit == 'Diamonds' and (suit == 'Spades' or suit == 'Clubs') then
 			print('yeah') --random little tidbit, when I was working on this Joker I was struggling a bit and used prints to make sure the if statements actually worked. The console spammed woo yeah when this Joker finally worked LMAO. I'm not removing these
 			return true
