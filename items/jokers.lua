@@ -58,7 +58,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:is_suit("Spades") then
                     return {
-						card = self,
+						card = card,
                         mult = card.ability.extra.mult,
 						colour = G.C.MULT
                     }
@@ -124,7 +124,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:is_suit("Hearts") then
                     return {
-						card = self,
+						card = card,
                         mult = card.ability.extra.mult,
 						colour = G.C.MULT,
                     }
@@ -190,7 +190,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:is_suit("Diamonds") then
                     return {
-						card = self,
+						card = card,
                         mult = card.ability.extra.mult,
 						colour = G.C.MULT,
                     }
@@ -256,7 +256,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:is_suit("Clubs") then
                     return {
-						card = self,
+						card = card,
                         mult = card.ability.extra.mult,
 						colour = G.C.MULT,
                     }
@@ -334,7 +334,7 @@ SMODS.Joker{
 			
 		if context.joker_main then
 				return {
-					card = self,
+					card = card,
 					Xmult_mod = card.ability.extra.Xmult,
 					message = 'X' .. card.ability.extra.Xmult,
 					colour = G.C.MULT
@@ -375,7 +375,7 @@ SMODS.Joker{
 							end
                     if not faces then
 					return {
-						card = self,
+						card = card,
 						Xchip_mod = card.ability.extra.x_chips,
 						message = 'X' .. card.ability.extra.x_chips,
 						colour = G.C.CHIPS
@@ -452,25 +452,26 @@ SMODS.Joker{
 		name = 'Hikikomori',
 			text = {
 				'{X:mult,C:white}X#1#{} Mult if played hand',
-				'has only one card.'
+				'has only {C:attention}#2#{} card.'
 				}
 			},
 	atlas = 'jokers',
 	pos = {x = 2, y = 0},
 	config = { extra = {
-		Xmult = 2
+		Xmult = 2,
+		cards = 1
 	}
 },
 	cost = 4,
 	rarity = 1,
 	blueprint_compat = true,
 	loc_vars = function(self,info_queue,center)
-		return {vars = {center.ability.extra.Xmult}}
+		return {vars = {center.ability.extra.Xmult, center.ability.extra.cards}}
 	end,
 	calculate = function(self,card,context)
-		if context.joker_main and #context.full_hand == 1 then
+		if context.joker_main and #context.full_hand == center.ability.extra.cards then
 				return {
-					card = self,
+					card = card,
 					Xmult_mod = card.ability.extra.Xmult,
 					message = 'X' .. card.ability.extra.Xmult,
 					colour = G.C.MULT
@@ -634,12 +635,12 @@ SMODS.Joker{
 SMODS.Joker{
 	key = 'imalwaysright',
 	loc_txt = {
-		name = 'I`m Always Right',
+		name = "I'm Always Right",
 			text = {
-				'Repeats last card {C:attention}#1#{} times',
-				'if hand has {C:attention}#2#{} or less cards.',
-				'Repeats last {C:attention}2{} cards {C:attention}#1#{} times',
-				'if hand has {C:attention}#3#{} or more cards'
+				'Retriggers {C:attention}last card{} {C:attention}#1#{} times',
+				'if hand has {C:attention}#2# or less{} cards.',
+				'Retriggers {C:attention}last 2{} cards {C:attention}#1#{} times',
+				'if hand has {C:attention}#3# or more{} cards'
 				}
 			},
 	atlas = 'jokers',
