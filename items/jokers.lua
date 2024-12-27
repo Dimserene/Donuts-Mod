@@ -466,10 +466,10 @@ SMODS.Joker{
 	rarity = 1,
 	blueprint_compat = true,
 	loc_vars = function(self,info_queue,center)
-		return {vars = {center.ability.extra.Xmult, center.ability.extra.cards}}
+		return {vars = {card.ability.extra.Xmult, card.ability.extra.cards}}
 	end,
 	calculate = function(self,card,context)
-		if context.joker_main and #context.full_hand == center.ability.extra.cards then
+		if context.joker_main and #context.full_hand == card.ability.extra.cards then
 				return {
 					card = card,
 					Xmult_mod = card.ability.extra.Xmult,
