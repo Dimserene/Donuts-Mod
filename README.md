@@ -8,4 +8,4 @@ Download and unzip the main folder in %APPDATA%/Balatro/Mods and you're ready to
 
 # Known issues
 
-Doughnut (refreshment) and Sparkling Water cause a crash with Cryptid when in consumeable slots but not used
+Doughnut (refreshment) and Sparkling Water in consumeable slots cause a crash with Cryptid when a hand is played
